@@ -28,6 +28,6 @@ You should install [.NET 6 Desktop Runtime](https://dotnet.microsoft.com/en-us/d
 ![Resize and file system changes](Docs/Images/resize_watcher.gif)
 
 ## See also
-- [Navigation]()
-- [Mark mode]()
-- [Error reports]()
+- [Navigation](Docs/Navigation.md)
+- [Mark mode](Docs/MarkMode.md)
+- [Error reports](Docs/ErrorReports.md)
