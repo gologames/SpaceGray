@@ -26,7 +26,7 @@ Click on the the **Color** button to colorize marked nodes according to them roo
 
 ## Unmark nodes
 
-In the mark mode click on marked node to **unmark** it 
+In the mark mode right click on a marked node to **unmark** it 
 
 ![Unmark nodes](Images/unmark_node.gif)
 
