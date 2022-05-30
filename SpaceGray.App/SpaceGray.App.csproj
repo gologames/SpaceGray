@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyName>SpaceGray</AssemblyName>
+    <RootNamespace>SpaceGray</RootNamespace>
+    <ApplicationIcon>Resources\space_gray.ico</ApplicationIcon>
+    <Authors>Gologames</Authors>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<Folder Include="Resources\" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<ProjectReference Include="..\SpaceGray.Core\SpaceGray.Core.csproj" />
+	</ItemGroup>
+
+</Project>
