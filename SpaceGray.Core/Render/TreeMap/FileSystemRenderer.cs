@@ -64,7 +64,7 @@ public static class FileSystemRenderer
         {
             if (application.FileSystemLayout.IsReady)
             {
-                FileSystemColorHexUtil.PropogateBaseColoredHex(application);
+                FileSystemColorHexUtil.PropagateBaseColoredHex(application);
                 DrawTreeMap(application.UIState, application.FileSystemLayout);
             }
         }

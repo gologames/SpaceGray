@@ -3,6 +3,8 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 
+#nullable enable
+
 namespace SpaceGray.Core.FileSystem;
 
 public class BufferedFileSystemUpdater : IBufferedFileSystemUpdater
@@ -10,14 +12,14 @@ public class BufferedFileSystemUpdater : IBufferedFileSystemUpdater
     private readonly FileSystemState fileSystemState;
     private long totalSize;
     private long totalCount;
-    private readonly BlockingCollection<object> nodesToDiscover;
+    private readonly BlockingCollection<object?> nodesToDiscover;
     private readonly List<FileSystemNode> nodesToCalculateSize;
-    private FileSystemEvent nextFileSystemEvent;
+    private FileSystemEvent? nextFileSystemEvent;
     private readonly FileSystemEventsHandler fileSystemEventsHandler;
     private readonly BlockingCollection<object> fileSystemEvents;
-    private readonly BlockingCollection<object>[] blockingCollections;
+    private readonly BlockingCollection<object?>[] blockingCollections;
     public bool IsEmpty => nodesToDiscover.Count == 0 && fileSystemEvents.Count == 0;
-    public event IBufferedFileSystemUpdater.UpdatedEventHandler Updated;
+    public event IBufferedFileSystemUpdater.UpdatedEventHandler? Updated;
 
     public BufferedFileSystemUpdater(FileSystemState fileSystemState, ErrorState errorState)
     {
@@ -28,8 +30,8 @@ public class BufferedFileSystemUpdater : IBufferedFileSystemUpdater
         nextFileSystemEvent = null;
         fileSystemEvents = new();
         fileSystemEventsHandler = new(this, fileSystemState, errorState);
-        blockingCollections = new BlockingCollection<object>[]
-            { nodesToDiscover, fileSystemEvents };
+        blockingCollections = new BlockingCollection<object?>[]
+            { nodesToDiscover, fileSystemEvents! };
     }
 
     public void AddFileSystemNode(FileSystemNode node)
@@ -42,9 +44,9 @@ public class BufferedFileSystemUpdater : IBufferedFileSystemUpdater
         }
         nodesToCalculateSize.Add(node);
     }
-    public FileSystemNode TryGetNextFileSystemNodeSync()
+    public FileSystemNode? TryGetNextFileSystemNodeSync()
     {
-        BlockingCollection<object>.TakeFromAny(blockingCollections, out object item);
+        BlockingCollection<object?>.TakeFromAny(blockingCollections, out object? item);
         if (item is FileSystemNode node) return node;
         if (item is FileSystemEvent fileSystemEvent)
         { nextFileSystemEvent = fileSystemEvent; }
@@ -64,7 +66,7 @@ public class BufferedFileSystemUpdater : IBufferedFileSystemUpdater
             nextFileSystemEvent = null;
             return fileSystemEvent;
         }
-        return fileSystemEvents.Take() as FileSystemEvent;
+        return (FileSystemEvent)fileSystemEvents.Take();
     }
 
     private bool IsUpdate()

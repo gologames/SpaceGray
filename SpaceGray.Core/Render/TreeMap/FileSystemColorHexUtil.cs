@@ -35,7 +35,7 @@ public static class FileSystemColorHexUtil
         return baseColoredHex;
     }
 
-    public static void PropogateBaseColoredHex(SpaceGrayApplication application)
+    public static void PropagateBaseColoredHex(SpaceGrayApplication application)
     {
         var queue = new Queue<LayoutNode<FileSystemNode>>();
         queue.Enqueue(application.FileSystemLayout.Root);
